@@ -1,5 +1,6 @@
 import React from "react";
-import {Base64} from 'js-base64';
+import { Base64 } from 'js-base64';
+import { credentials } from './credentials.js';
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -7,16 +8,14 @@ class GitHubForks extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: [],
-            statusOk: false
+            statusOk: false,
+            json: []
         };
     }
 
     componentDidMount() {
         let headers = new Headers();
-        let username = '';
-        let password = '';
-        headers.set('Authorization', 'Basic ' + Base64.encode(username + ":" + password));
+        headers.set('Authorization', 'Basic ' + Base64.encode(credentials.username + ":" + credentials.password));
 
         fetch("https://api.github.com/repos/xp-dojo/tdd-bank-account-java/forks",
             {
@@ -29,7 +28,7 @@ class GitHubForks extends React.Component {
                     (result) => {
                         this.setState({
                             isLoaded: true,
-                            items: result
+                            json: result
                         });
                     },
                     // Note: it's important to handle errors here
@@ -46,19 +45,19 @@ class GitHubForks extends React.Component {
     }
 
     render() {
-        const {error, isLoaded, items, statusOk} = this.state;
+        const { error, isLoaded, statusOk, json } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else if (!statusOk) {
             return (
-                <p>{items.message}</p>
+                <p>{json.message}</p>
             );
         } else {
             return (
                 <ul>
-                    {items.map(item => (
+                    {json.map(item => (
                         <p>{item.owner.login} {item.full_name}</p>
                     ))}
                 </ul>
