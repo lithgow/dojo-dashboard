@@ -1,3 +1,5 @@
+[![build](../../workflows/build/badge.svg)](../../actions?query=workflow%3Abuild)
+
 # GitHub Fork Watcher
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
