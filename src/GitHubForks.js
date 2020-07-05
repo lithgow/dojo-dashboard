@@ -58,7 +58,10 @@ class GitHubForks extends React.Component {
             return (
                 <ul>
                     {json.map(item => (
-                        <p>{item.owner.login} {item.full_name}</p>
+                        <div>
+                            <img src={item.owner.avatar_url} alt={item.owner.login} width="40" height="40"/>
+                            {item.owner.login} {item.full_name}
+                        </div>
                     ))}
                 </ul>
             );
