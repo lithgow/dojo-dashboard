@@ -1,6 +1,7 @@
 import React from "react";
 import * as GitHubApi from './GitHubApi'
 import GitHubUser from "./GitHubUser";
+import GitHubCommitCount from "./GitHubCommitCount";
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class GitHubForks extends React.Component {
                             <img src={item.owner.avatar_url} alt="" width="40" height="40"/>
                             <GitHubUser url={item.owner.url}/>
                             <span> ({item.full_name})</span>
+                            <GitHubCommitCount url={item.commits_url}/>
                         </div>
                     ))}
                 </div>

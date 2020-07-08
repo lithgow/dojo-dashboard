@@ -6,6 +6,7 @@ export class GitHubApiResponse {
     isLoaded = false;
     json = [];
     error = null;
+    headers = null;
 }
 
 export const getAuthenticated = (url) => {
@@ -18,6 +19,7 @@ export const get = (url) => new Promise((resolve) => {
     let apiResponse = new GitHubApiResponse();
     getAuthenticated(url).then(response => {
         apiResponse.statusOk = response.ok;
+        apiResponse.headers = response.headers;
         response.json().then(
             (result) => {
                 apiResponse.isLoaded = true;
