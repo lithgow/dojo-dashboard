@@ -19,12 +19,12 @@ class GitHubUser extends React.Component {
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
         if (error) {
-            console.log("Error getting " + this.props.url + " : " + error.message);
+            console.log(`Error getting ${this.props.url} : ${error.message}`);
             return <div>!!!</div>;
         } else if (!isLoaded) {
             return <div>...</div>;
         } else if (!statusOk) {
-            console.log("Error getting " + this.props.url + " : " + json.message);
+            console.log(`Error getting ${this.props.url} : ${json.message}`);
             return <div>!!!</div>;
         } else {
             return (
