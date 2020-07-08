@@ -31,9 +31,8 @@ class GitHubForks extends React.Component {
                 <div>
                     {json.map(item => (
                         <div key={item.owner.login}>
-                            <img src={item.owner.avatar_url} alt="" width="40" height="40"/>
+                            <img src={item.owner.avatar_url} alt="" width="30" height="30"/>
                             <GitHubUser url={item.owner.url}/>
-                            <span> ({item.full_name})</span>
                             <GitHubCommitCount url={item.commits_url}/>
                         </div>
                     ))}
