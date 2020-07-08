@@ -1,5 +1,6 @@
 import React from "react";
 import * as GitHubApi from './GitHubApi'
+import GitHubUser from "./GitHubUser";
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -30,7 +31,8 @@ class GitHubForks extends React.Component {
                     {json.map(item => (
                         <div key={item.owner.login}>
                             <img src={item.owner.avatar_url} alt="" width="40" height="40"/>
-                            <span> {item.full_name}</span>
+                            <GitHubUser url={item.owner.url}/>
+                            <span> ({item.full_name})</span>
                         </div>
                     ))}
                 </div>
