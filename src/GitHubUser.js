@@ -29,7 +29,7 @@ class GitHubUser extends React.Component {
         } else {
             return (
                 <span>
-                    <img src={json.avatar_url} alt="" width="30" height="30"/>
+                    <img src={json.avatar_url} alt="" width="25" height="25"/>
                     &nbsp;
                     {json.name ? json.name : json.login}
                 </span>

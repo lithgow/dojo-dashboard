@@ -13,14 +13,13 @@ class GitHubCoverage extends React.Component {
     }
 
     parseCoverageCounters() {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(this.props.xml,"text/xml");
+        const xml = new DOMParser().parseFromString(this.props.xml,"text/xml");
         const counters = xml.evaluate( '/report/counter', xml, null, XPathResult.ANY_TYPE, null );
 
         let summary = "";
         let result = counters.iterateNext();
         while (result) {
-            let missed = result.getAttribute("missed");
+            const missed = result.getAttribute("missed");
             summary += missed + " ";
             result = counters.iterateNext();
         }

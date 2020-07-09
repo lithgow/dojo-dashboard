@@ -10,7 +10,7 @@ class GitHubCommitCount extends React.Component {
     }
 
     componentDidMount() {
-        let firstCommitUrl = this.props.url.replace("{/sha}", "") + "?per_page=1";
+        const firstCommitUrl = this.props.url.replace("{/sha}", "") + "?per_page=1";
         GitHubApi.get(firstCommitUrl)
             .then(response => {
                 this.setState({apiResponse: response});
@@ -28,9 +28,9 @@ class GitHubCommitCount extends React.Component {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
             return <div>!!!</div>;
         } else {
-            let linkHeader = this.state.apiResponse.headers.get('link');
-            let matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);
-            let numberOfCommits = matches[3];
+            const linkHeader = this.state.apiResponse.headers.get('link');
+            const matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);
+            const numberOfCommits = matches[3];
             return (
                 <span> {numberOfCommits}</span>
             );
