@@ -2,7 +2,7 @@ import React from "react";
 import * as GitHubApi from './GitHubApi'
 import GitHubUser from "./GitHubUser";
 import GitHubCommitCount from "./GitHubCommitCount";
-import GitHubBuildStatus from "./GitHubBuildStatus";
+import GitHubBuildSummary from "./GitHubBuildSummary";
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class GitHubForks extends React.Component {
                         <div key={item.owner.login}>
                             <GitHubUser url={item.owner.url}/>
                             <GitHubCommitCount url={item.commits_url}/>
-                            <GitHubBuildStatus url={item.html_url}/>
+                            <GitHubBuildSummary url={item.url}/>
                         </div>
                     ))}
                 </div>

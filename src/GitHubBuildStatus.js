@@ -2,14 +2,13 @@ import React from "react";
 
 class GitHubBuildStatus extends React.Component {
     render() {
-        let cacheBust = new Date().getTime();
-        let buildStatusBadgeUrl = `${this.props.url}/workflows/build/badge.svg?${cacheBust}`;
+        let buildStatusBadgeUrl = "no-build-status-badge.svg";
+        if (this.props.url) {
+            const cacheBust = new Date().getTime();
+            buildStatusBadgeUrl = `${this.props.url}?${cacheBust}`;
+        }
         return (
-            <span>
-                <img src={buildStatusBadgeUrl}
-                     alt=""
-                     onError={(e) => {e.target.onerror = null; e.target.src="no-build-status-badge.svg"}}/>
-            </span>
+            <img src={buildStatusBadgeUrl} alt=""/>
         );
     }
 }

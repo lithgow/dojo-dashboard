@@ -9,7 +9,8 @@
     "js-base64": "^2.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "unzipper": "^0.10.11"
   },
   "scripts": {
     "start": "react-scripts start",
