@@ -8,7 +8,7 @@ class GitHubTestResults extends React.Component {
             summary = `${testResults.tests} ${testResults.passed} ${testResults.failed} ${testResults.skipped}`;
         }
         return (
-            <span>{summary}</span>
+            <span> {summary}</span>
         );
     }
 }

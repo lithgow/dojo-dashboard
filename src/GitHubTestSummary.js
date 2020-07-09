@@ -3,6 +3,7 @@ import * as GitHubApi from './GitHubApi'
 import * as unzipper from "unzipper";
 import {getRaw} from "./GitHubApi";
 import GitHubTestResults from "./GitHubTestResults";
+import GitHubCoverage from "./GitHubCoverage";
 
 class GitHubTestSummary extends React.Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class GitHubTestSummary extends React.Component {
         return (
             <span>
                 <GitHubTestResults json={this.state.testResults}/>
+                <GitHubCoverage xml={this.state.coverageResults}/>
             </span>
         );
     }
