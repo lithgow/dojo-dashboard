@@ -54,8 +54,8 @@ class GitHubBuildSummary extends React.Component {
     render() {
         return (
             <span>
+                <span> {this.state.lastBuildNumber}{this.state.lastBuildNumber !== this.state.numberOfBuilds ? "(!)":""} </span>
                 <GitHubBuildStatus url={this.state.buildStatusBadgeUrl}/>
-                <span>{this.state.lastBuildNumber}{this.state.lastBuildNumber !== this.state.numberOfBuilds ? "(!)":""}</span>
                 {this.state.lastBuildId > 0 &&
                     <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
                 }
