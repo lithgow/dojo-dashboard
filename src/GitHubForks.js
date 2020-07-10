@@ -13,7 +13,7 @@ class GitHubForks extends React.Component {
     }
 
     componentDidMount() {
-        GitHubApi.get("https://api.github.com/repos/xp-dojo-classes/tdd-bank-account-java/forks")
+        GitHubApi.get("https://api.github.com/repos/xp-dojo-classes/tdd-bank-account-java/forks?per_page=1000")
             .then(response => {
                 this.setState({apiResponse: response});
             })
