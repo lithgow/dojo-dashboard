@@ -32,13 +32,11 @@ class GitHubForks extends React.Component {
             return (
                 <div>
                     {json.map(fork => (
-                        <div key={fork.owner.login}>
-                            <Card>
-                                <GitHubUser url={fork.owner.url}/>
-                                <GitHubCommitCount url={fork.commits_url}/>
-                                <GitHubBuildSummary url={fork.url}/>
-                            </Card>
-                        </div>
+                        <Card key={fork.owner.login} raised={true} square={true}>
+                            <GitHubUser url={fork.owner.url}/>
+                            <GitHubCommitCount url={fork.commits_url}/>
+                            <GitHubBuildSummary url={fork.url}/>
+                        </Card>
                     ))}
                 </div>
             );
