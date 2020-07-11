@@ -3,6 +3,7 @@ import * as GitHubApi from './GitHubApi'
 import GitHubUser from "./GitHubUser";
 import GitHubCommitCount from "./GitHubCommitCount";
 import GitHubBuildSummary from "./GitHubBuildSummary";
+import Card from '@material-ui/core/Card';
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -32,9 +33,11 @@ class GitHubForks extends React.Component {
                 <div>
                     {json.map(fork => (
                         <div key={fork.owner.login}>
-                            <GitHubUser url={fork.owner.url}/>
-                            <GitHubCommitCount url={fork.commits_url}/>
-                            <GitHubBuildSummary url={fork.url}/>
+                            <Card>
+                                <GitHubUser url={fork.owner.url}/>
+                                <GitHubCommitCount url={fork.commits_url}/>
+                                <GitHubBuildSummary url={fork.url}/>
+                            </Card>
                         </div>
                     ))}
                 </div>
