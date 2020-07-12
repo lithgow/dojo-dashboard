@@ -1,9 +1,11 @@
 import React from "react";
+import Box from "@material-ui/core/Box";
+import Card from '@material-ui/core/Card';
+import Grid from "@material-ui/core/Grid";
 import * as GitHubApi from './GitHubApi'
 import GitHubUser from "./GitHubUser";
 import GitHubCommitCount from "./GitHubCommitCount";
 import GitHubBuildSummary from "./GitHubBuildSummary";
-import Card from '@material-ui/core/Card';
 
 class GitHubForks extends React.Component {
     constructor(props) {
@@ -30,15 +32,19 @@ class GitHubForks extends React.Component {
             return <div>{json.message}</div>;
         } else {
             return (
-                <div>
+                <Grid container direction="row">
                     {json.map(fork => (
-                        <Card key={fork.owner.login} raised={true} square={true}>
-                            <GitHubUser url={fork.owner.url}/>
-                            <GitHubCommitCount url={fork.commits_url}/>
-                            <GitHubBuildSummary url={fork.url}/>
-                        </Card>
+                        <Box width={400} m={0.5}>
+                            <Card key={fork.owner.login} raised={true} square={true}>
+                                <Box m={0.5}>
+                                    <GitHubUser url={fork.owner.url}/>
+                                    <GitHubCommitCount url={fork.commits_url}/>
+                                    <GitHubBuildSummary url={fork.url}/>
+                                </Box>
+                            </Card>
+                        </Box>
                     ))}
-                </div>
+                </Grid>
             );
         }
     }

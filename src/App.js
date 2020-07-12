@@ -1,18 +1,17 @@
 import React from 'react';
+import Box from "@material-ui/core/Box";
 import './App.css';
 import GitHubForks from './GitHubForks'
 
 class App extends React.Component {
     render() {
         return (
-            <div className="App">
-                <div className="Header">
+            <Box className="App">
+                <Box className="Header">
                     <img src="navbar_brand2x.png" alt="xp-dojo" height="50" width="50"/>
-                </div>
-                <columns>
-                    <GitHubForks/>
-                </columns>
-            </div>
+                </Box>
+                <GitHubForks/>
+            </Box>
         );
     }
 }
