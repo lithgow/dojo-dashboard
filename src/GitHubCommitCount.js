@@ -21,12 +21,12 @@ class GitHubCommitCount extends React.Component {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
         if (error) {
             console.log(`Error getting ${this.props.url} : ${error.message}`);
-            return <div>!!!</div>;
+            return <span>!!!</span>;
         } else if (!isLoaded) {
-            return <div>...</div>;
+            return <span>...</span>;
         } else if (!statusOk) {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
-            return <div>!!!</div>;
+            return <span>!!!</span>;
         } else {
             const linkHeader = this.state.apiResponse.headers.get('link');
             const matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);

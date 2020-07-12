@@ -25,11 +25,11 @@ class GitHubForks extends React.Component {
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
         if (error) {
-            return <div>Error: {error.message}</div>;
+            return <Box>Error: {error.message}</Box>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <Box>Loading...</Box>;
         } else if (!statusOk) {
-            return <div>{json.message}</div>;
+            return <Box>{json.message}</Box>;
         } else {
             return (
                 <Grid container direction="row">
