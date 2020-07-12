@@ -15,6 +15,11 @@ const theme = createMuiTheme({
                 width: 25,
             }
         },
+        MuiAppBar: {
+            colorPrimary: {
+                backgroundColor: '#364252'
+            }
+        }
     }
 });
 
