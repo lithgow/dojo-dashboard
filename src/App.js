@@ -1,6 +1,8 @@
 import React from 'react';
 import AppBar from "@material-ui/core/AppBar";
+import Badge from "@material-ui/core/Badge";
 import Box from "@material-ui/core/Box";
+import {withStyles} from "@material-ui/core/styles";
 import './App.css';
 import GitHubForks from './GitHubForks'
 
@@ -18,3 +20,12 @@ class App extends React.Component {
 }
 
 export default App;
+
+export const StyledBadge = withStyles((theme) => ({
+    badge: {
+        right: 0,
+        top: 12,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+    },
+}))(Badge);
