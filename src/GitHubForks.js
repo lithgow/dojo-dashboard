@@ -36,7 +36,7 @@ class GitHubForks extends React.Component {
                     {json.map(fork => (
                         <Box width={400} m={0.5}>
                             <Card key={fork.owner.login} raised={true} square={true}>
-                                <Box m={0.5}>
+                                <Box m={0.5} display="flex" alignItems="center">
                                     <GitHubUser url={fork.owner.url}/>
                                     <GitHubCommitCount url={fork.commits_url}/>
                                     <GitHubBuildSummary url={fork.url}/>

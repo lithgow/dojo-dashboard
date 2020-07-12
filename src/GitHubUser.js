@@ -1,5 +1,7 @@
 import React from "react";
+import Avatar from "@material-ui/core/Avatar";
 import * as GitHubApi from './GitHubApi'
+import Box from "@material-ui/core/Box";
 
 class GitHubUser extends React.Component {
     constructor(props) {
@@ -18,21 +20,20 @@ class GitHubUser extends React.Component {
 
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
+        const userName = json.name ? json.name : json.login;
         if (error) {
             console.log(`Error getting ${this.props.url} : ${error.message}`);
-            return <div>!!!</div>;
+            return <Box>!!!</Box>;
         } else if (!isLoaded) {
-            return <div>...</div>;
+            return <Box>...</Box>;
         } else if (!statusOk) {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
-            return <div>!!!</div>;
+            return <Box>!!!</Box>;
         } else {
             return (
-                <span>
-                    <img src={json.avatar_url} alt="" width="25" height="25"/>
-                    &nbsp;
-                    {json.name ? json.name : json.login}
-                </span>
+                <Box display="flex" alignItems="center">
+                    <Avatar alt={userName} src={json.avatar_url} />&nbsp;{userName}
+                </Box>
             );
         }
     }

@@ -7,6 +7,14 @@ const theme = createMuiTheme({
             default: '#364252',
             paper: '#364252'
         },
+    },
+    overrides: {
+        MuiAvatar: {
+            root: {
+                height: 25,
+                width: 25,
+            }
+        },
     }
 });
 
