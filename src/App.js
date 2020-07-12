@@ -7,7 +7,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="Header">
-                    <img src="logo192.png" alt="xp-dojo" height="50" width="50"/>
+                    <img src="navbar_brand2x.png" alt="xp-dojo" height="50" width="50"/>
                 </div>
                 <columns>
                     <GitHubForks/>
