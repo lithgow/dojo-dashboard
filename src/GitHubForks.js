@@ -32,7 +32,7 @@ class GitHubForks extends React.Component {
             return <Box>{json.message}</Box>;
         } else {
             return (
-                <Grid container direction="row">
+                <Grid container direction="row" justify="center">
                     {json.map(fork => (
                         <Box width={400} m={0.5}>
                             <Card key={fork.owner.login} raised={true} square={true}>
