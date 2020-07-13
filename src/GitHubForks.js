@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Card from '@material-ui/core/Card';
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import * as GitHubApi from './GitHubApi'
 import GitHubUser from "./GitHubUser";
 import GitHubCommitCount from "./GitHubCommitCount";
@@ -37,9 +38,23 @@ class GitHubForks extends React.Component {
                         <Box width={400} m={0.5}>
                             <Card key={fork.owner.login} raised={true} square={true}>
                                 <Box m={0.5} display="flex" alignItems="center">
-                                    <GitHubUser url={fork.owner.url}/>
-                                    <GitHubCommitCount url={fork.commits_url}/>
-                                    <GitHubBuildSummary url={fork.url}/>
+                                    <Link href={fork.html_url}
+                                          color="inherit" underline="none"
+                                          target="_blank" rel="noopener">
+                                        <GitHubUser url={fork.owner.url}/>
+                                    </Link>
+
+                                    <Link href={GitHubApi.commitsUrlFrom(fork.html_url)}
+                                          color="inherit" underline="none"
+                                          target="_blank" rel="noopener">
+                                        <GitHubCommitCount url={fork.commits_url}/>
+                                    </Link>
+
+                                    <Link href={GitHubApi.actionsUrlFrom(fork.html_url)}
+                                          color="inherit" underline="none"
+                                          target="_blank" rel="noopener">
+                                        <GitHubBuildSummary url={fork.url}/>
+                                    </Link>
                                 </Box>
                             </Card>
                         </Box>

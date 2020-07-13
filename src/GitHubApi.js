@@ -3,6 +3,7 @@ import {credentials} from "./credentials";
 
 export const forksUrl = "https://api.github.com/repos/xp-dojo-classes/tdd-bank-account-java/forks?per_page=1000";
 export const actionsUrlFrom = (repoUrl) => { return `${repoUrl}/actions`; }
+export const commitsUrlFrom = (repoUrl) => { return `${repoUrl}/commits`; }
 export const workflowsUrlFrom = (repoUrl) => { return `${actionsUrlFrom(repoUrl)}/workflows`; }
 export const workflowRunUrlFrom = (repoUrl, workflowId) => {
     return `${workflowsUrlFrom(repoUrl)}/${workflowId}/runs?per_page=1`;
