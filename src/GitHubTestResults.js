@@ -10,18 +10,22 @@ class GitHubTestResults extends React.Component {
     render() {
         if (this.props.json) {
             const testResults = JSON.parse(this.props.json);
+            const passedBadgeColor = testResults.passed > 0 && testResults.failed === 0 ? 'secondary': 'primary';
+            const failedBadgeColor = testResults.failed > 0 ? 'error': 'primary';
             return (
                 <Box display="flex" alignItems="center">
-                    <StyledBadge badgeContent={testResults.tests} color="primary">
+                    <StyledBadge badgeContent={testResults.tests}>
                         <AssignmentIcon />
                     </StyledBadge>
-                    <StyledBadge badgeContent={testResults.passed} color="primary">
+                    <StyledBadge badgeContent={testResults.passed}
+                                 color={passedBadgeColor}>
                         <CheckIcon />
                     </StyledBadge>
-                    <StyledBadge badgeContent={testResults.failed} color="primary">
+                    <StyledBadge badgeContent={testResults.failed}
+                                 color={failedBadgeColor}>
                         <ClearIcon />
                     </StyledBadge>
-                    <StyledBadge badgeContent={testResults.skipped} color="primary">
+                    <StyledBadge badgeContent={testResults.skipped}>
                         <BlockIcon />
                     </StyledBadge>
                 </Box>

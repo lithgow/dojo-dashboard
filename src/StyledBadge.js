@@ -8,12 +8,19 @@ const SmallerBadge = withStyles((theme) => ({
         top: 6,
         padding: '0 2px',
     },
+    colorSecondary: {
+        backgroundColor: '#00fc00'
+    }
 }))(Badge);
+
+StyledBadge.defaultProps = {
+    color: "primary"
+};
 
 export default function StyledBadge(props) {
     return (
         <Box width={35}>
-            <SmallerBadge color="primary" badgeContent={props.badgeContent} showZero={true}>
+            <SmallerBadge color={props.color} badgeContent={props.badgeContent} showZero={true}>
                 {props.children}
             </SmallerBadge>
         </Box>

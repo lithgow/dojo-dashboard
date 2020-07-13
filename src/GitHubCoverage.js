@@ -10,7 +10,7 @@ class GitHubCoverage extends React.Component {
             coverage = this.parseCoverageCounters(this.props.xml);
         }
         return (
-            <StyledBadge badgeContent={coverage} color="primary">
+            <StyledBadge badgeContent={coverage}>
                 <AssessmentIcon />
             </StyledBadge>
         );
