@@ -12,6 +12,18 @@ class GitHubCommitCount extends React.Component {
     }
 
     componentDidMount() {
+        this.timerID = setInterval(
+            () => this.getCommits(),
+            GitHubApi.refreshInterval
+        );
+        this.getCommits();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    getCommits() {
         const firstCommitUrl = this.props.url.replace("{/sha}", "") + "?per_page=1";
         GitHubApi.get(firstCommitUrl)
             .then(response => {
