@@ -9,8 +9,9 @@ class GitHubCoverage extends React.Component {
         if (this.props.xml) {
             coverage = this.parseCoverageCounters(this.props.xml);
         }
+        const coverageColor = coverage > 0 && coverage < 90 ? 'error': 'primary';
         return (
-            <StyledBadge badgeContent={coverage}>
+            <StyledBadge badgeContent={`${coverage}%`} color={coverageColor}>
                 <AssessmentIcon />
             </StyledBadge>
         );
@@ -26,9 +27,8 @@ class GitHubCoverage extends React.Component {
             const covered = parseInt(instructionCoverage.getAttribute("covered"));
             const missed = parseInt(instructionCoverage.getAttribute("missed"));
             const total = covered + missed;
-            const percentage = Math.floor(covered / total * 100);
+            coverage = Math.floor(covered / total * 100);
             // coverage = `${percentage}% (${covered}/${total})`;
-            coverage = `${percentage}%`;
         }
         return coverage;
     }
