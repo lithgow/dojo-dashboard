@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import Card from '@material-ui/core/Card';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import * as GitHubApi from './GitHubApi'
@@ -28,7 +29,11 @@ class GitHubForks extends React.Component {
         if (error) {
             return <Box>Error: {error.message}</Box>;
         } else if (!isLoaded) {
-            return <Box>Loading...</Box>;
+            return (
+                <Grid container alignItems="center" justify="center">
+                    <CircularProgress />
+                </Grid>
+            );
         } else if (!statusOk) {
             return <Box>{json.message}</Box>;
         } else {
