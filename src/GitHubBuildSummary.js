@@ -11,7 +11,7 @@ class GitHubBuildSummary extends React.Component {
         this.state = {
             numberOfBuilds: "?",
             lastBuildNumber: "?",
-            lastBuildId: 0,
+            lastBuildId: null,
             lastBuildConclusion: ""
         };
     }
@@ -69,9 +69,7 @@ class GitHubBuildSummary extends React.Component {
                 <StyledBadge badgeContent={buildNumber} color={buildBadgeColor}>
                     <BuildIcon color={buildIconColor}/>
                 </StyledBadge>
-                {this.state.lastBuildId > 0 &&
-                    <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
-                }
+                <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
             </Box>
         );
     }
