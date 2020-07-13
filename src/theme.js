@@ -9,15 +9,15 @@ const theme = createMuiTheme({
         },
     },
     overrides: {
+        MuiAppBar: {
+            colorPrimary: {
+                backgroundColor: '#364252'
+            }
+        },
         MuiAvatar: {
             root: {
                 height: 25,
                 width: 25,
-            }
-        },
-        MuiAppBar: {
-            colorPrimary: {
-                backgroundColor: '#364252'
             }
         }
     }

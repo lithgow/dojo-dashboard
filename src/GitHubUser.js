@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import * as GitHubApi from './GitHubApi'
 import Box from "@material-ui/core/Box";
+import * as GitHubApi from './GitHubApi'
 
 class GitHubUser extends React.Component {
     constructor(props) {
