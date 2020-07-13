@@ -1,14 +1,18 @@
 import React from "react";
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import StyledBadge from "./StyledBadge";
 
 class GitHubCoverage extends React.Component {
 
     render() {
-        let summary = "";
+        let coverage = "-";
         if (this.props.xml) {
-            summary = this.parseCoverageCounters(this.props.xml);
+            coverage = this.parseCoverageCounters(this.props.xml);
         }
         return (
-            <span> {summary}</span>
+            <StyledBadge badgeContent={coverage} color="primary">
+                <AssessmentIcon />
+            </StyledBadge>
         );
     }
 
@@ -16,16 +20,17 @@ class GitHubCoverage extends React.Component {
         const xml = new DOMParser().parseFromString(this.props.xml,"text/xml");
         const counters = xml.evaluate( `/report/counter[@type='INSTRUCTION']`, xml, null, XPathResult.ANY_TYPE, null );
 
-        let summary = "";
+        let coverage = "-";
         let instructionCoverage = counters.iterateNext();
         if (instructionCoverage) {
             const covered = parseInt(instructionCoverage.getAttribute("covered"));
             const missed = parseInt(instructionCoverage.getAttribute("missed"));
             const total = covered + missed;
             const percentage = Math.floor(covered / total * 100);
-            summary = `${percentage}% (${covered}/${total})`;
+            // coverage = `${percentage}% (${covered}/${total})`;
+            coverage = `${percentage}%`;
         }
-        return summary;
+        return coverage;
     }
 }
 

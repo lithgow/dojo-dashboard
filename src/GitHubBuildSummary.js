@@ -1,10 +1,10 @@
 import React from "react";
+import Box from "@material-ui/core/Box";
 import BuildIcon from '@material-ui/icons/Build';
+import StyledBadge from "./StyledBadge";
 import * as GitHubApi from './GitHubApi'
 import GitHubTestSummary from "./GitHubTestSummary";
 import GitHubBuildStatus from "./GitHubBuildStatus";
-import {StyledBadge} from "./App";
-import Box from "@material-ui/core/Box";
 
 class GitHubBuildSummary extends React.Component {
     constructor(props) {
@@ -59,17 +59,15 @@ class GitHubBuildSummary extends React.Component {
             (this.state.lastBuildNumber !== this.state.numberOfBuilds ? "!":"");
 
         return (
-            <span>
-                <GitHubBuildStatus url={this.state.buildStatusBadgeUrl}/>
-                <StyledBadge badgeContent={buildNumber} color="primary">
+            <Box display="flex" alignItems="center">
+                {/*<GitHubBuildStatus url={this.state.buildStatusBadgeUrl}/>*/}
+                <StyledBadge badgeContent={buildNumber}>
                     <BuildIcon />
                 </StyledBadge>
                 {this.state.lastBuildId > 0 &&
-                    <Box>
-                        <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
-                    </Box>
+                    <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
                 }
-            </span>
+            </Box>
         );
     }
 }

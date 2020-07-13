@@ -1,4 +1,6 @@
 import React from "react";
+import PublishIcon from '@material-ui/icons/Publish';
+import StyledBadge from "./StyledBadge";
 import * as GitHubApi from './GitHubApi'
 
 class GitHubCommitCount extends React.Component {
@@ -32,7 +34,9 @@ class GitHubCommitCount extends React.Component {
             const matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);
             const numberOfCommits = matches[3];
             return (
-                <span> {numberOfCommits}</span>
+                <StyledBadge badgeContent={numberOfCommits}>
+                    <PublishIcon />
+                </StyledBadge>
             );
         }
     }
