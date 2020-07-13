@@ -22,6 +22,7 @@ export class GitHubApiResponse {
 
 export const getRaw = (url) => {
     const headers = new Headers();
+    headers.set('Accept', 'application/vnd.github.v3+json');
     headers.set('Authorization', 'Basic ' + Base64.encode(credentials.username + ":" + credentials.password));
     return fetch(url, { method: 'GET', headers: headers });
 }
