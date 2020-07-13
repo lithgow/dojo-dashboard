@@ -18,6 +18,18 @@ class GitHubForks extends React.Component {
     }
 
     componentDidMount() {
+        this.timerID = setInterval(
+            () => this.getForks(),
+            GitHubApi.refreshInterval
+        );
+        this.getForks();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    getForks() {
         GitHubApi.get(GitHubApi.forksUrl)
             .then(response => {
                 this.setState({apiResponse: response});
