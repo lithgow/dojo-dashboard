@@ -24,6 +24,19 @@ class GitHubBuildSummary extends React.Component {
     }
 
     componentDidMount() {
+        this.timerID = setInterval(
+            () => this.getBuilds(),
+            GitHubApi.refreshInterval
+        );
+        this.getBuilds();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+
+    getBuilds() {
         GitHubApi.get(GitHubApi.workflowsUrlFrom(this.props.url))
             .then(response => {
                 const buildWorkflow = response.json.workflows.find(workflow => workflow.name === "build");
