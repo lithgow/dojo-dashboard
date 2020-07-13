@@ -35,7 +35,7 @@ class GitHubCommitCount extends React.Component {
             const linkHeader = this.state.apiResponse.headers.get('link');
             const matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);
             numberOfCommits = matches[3];
-            iconColor = "active";
+            iconColor = "action";
         }
         return (
             <StyledBadge badgeContent={numberOfCommits}>

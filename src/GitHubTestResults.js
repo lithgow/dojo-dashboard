@@ -8,29 +8,52 @@ import StyledBadge from "./StyledBadge";
 
 class GitHubTestResults extends React.Component {
     render() {
+        let testCount = "-";
+        let passCount = "-";
+        let failCount = "-";
+        let skipCount = "-";
+
+        let testIconColor = "disabled";
+        let passIconColor = "disabled";
+        let failIconColor = "disabled";
+        let skipIconColor = "disabled";
+
+        let passBadgeColor = "primary";
+        let failBadgeColor = "primary";
+
         if (this.props.json) {
             const testResults = JSON.parse(this.props.json);
-            const passedBadgeColor = testResults.passed > 0 && testResults.failed === 0 ? 'secondary': 'primary';
-            const failedBadgeColor = testResults.failed > 0 ? 'error': 'primary';
-            return (
-                <Box display="flex" alignItems="center">
-                    <StyledBadge badgeContent={testResults.tests}>
-                        <AssignmentIcon />
-                    </StyledBadge>
-                    <StyledBadge badgeContent={testResults.passed}
-                                 color={passedBadgeColor}>
-                        <CheckIcon />
-                    </StyledBadge>
-                    <StyledBadge badgeContent={testResults.failed}
-                                 color={failedBadgeColor}>
-                        <ClearIcon />
-                    </StyledBadge>
-                    <StyledBadge badgeContent={testResults.skipped}>
-                        <BlockIcon />
-                    </StyledBadge>
-                </Box>
-            );
-        } else return "";
+
+            testCount = testResults.tests;
+            passCount = testResults.passed;
+            failCount = testResults.failed;
+            skipCount = testResults.skipped;
+
+            testIconColor = "action";
+            passIconColor = "action";
+            failIconColor = "action";
+            skipIconColor = "action";
+
+            passBadgeColor = testResults.passed > 0 && testResults.failed === 0 ? 'secondary': 'primary';
+            failBadgeColor = testResults.failed > 0 ? 'error': 'primary';
+        }
+        return (
+            <Box display="flex" alignItems="center">
+                <StyledBadge badgeContent={testCount}>
+                    <AssignmentIcon color={testIconColor}/>
+                </StyledBadge>
+                <StyledBadge badgeContent={passCount} color={passBadgeColor}>
+                    <CheckIcon color={passIconColor}/>
+                </StyledBadge>
+                <StyledBadge badgeContent={failCount} color={failBadgeColor}>
+                    <ClearIcon color={failIconColor}/>
+                </StyledBadge>
+                <StyledBadge badgeContent={skipCount}>
+                    <BlockIcon color={skipIconColor}/>
+                </StyledBadge>
+            </Box>
+        );
+
     }
 }
 

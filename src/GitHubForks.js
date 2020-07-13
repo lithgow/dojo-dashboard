@@ -40,8 +40,8 @@ class GitHubForks extends React.Component {
             return (
                 <Grid container direction="row" justify="center">
                     {json.map(fork => (
-                        <Box width={400} m={0.5}>
-                            <Card key={fork.owner.login} raised={true} square={true}>
+                        <Box key={fork.owner.login} width={400} m={0.5}>
+                            <Card raised={true} square={true}>
                                 <Box m={0.5} display="flex" alignItems="center">
                                     <Link href={fork.html_url} >
                                         <GitHubUser url={fork.owner.url}/>
