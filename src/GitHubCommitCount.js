@@ -21,24 +21,27 @@ class GitHubCommitCount extends React.Component {
 
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
+        let numberOfCommits;
+        let iconColor = "disabled";
         if (error) {
             console.log(`Error getting ${this.props.url} : ${error.message}`);
-            return <span>!!!</span>;
+            numberOfCommits="!";
         } else if (!isLoaded) {
-            return <span>...</span>;
+            numberOfCommits="?";
         } else if (!statusOk) {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
-            return <span>!!!</span>;
+            numberOfCommits="!";
         } else {
             const linkHeader = this.state.apiResponse.headers.get('link');
             const matches = linkHeader.match(/(.*"next")(.*page=)([0-9]*)(.*"last")/);
-            const numberOfCommits = matches[3];
-            return (
-                <StyledBadge badgeContent={numberOfCommits}>
-                    <PublishIcon />
-                </StyledBadge>
-            );
+            numberOfCommits = matches[3];
+            iconColor = "active";
         }
+        return (
+            <StyledBadge badgeContent={numberOfCommits}>
+                <PublishIcon color={iconColor} />
+            </StyledBadge>
+        );
     }
 }
 
