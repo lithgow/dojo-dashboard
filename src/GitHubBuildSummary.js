@@ -57,7 +57,11 @@ class GitHubBuildSummary extends React.Component {
     render() {
         const buildNumber = this.state.lastBuildNumber +
             (this.state.lastBuildNumber !== this.state.numberOfBuilds ? "!":"");
-        const buildIconColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'action';
+
+        let buildIconColor = "disabled";
+        if (this.state.lastBuildConclusion) {
+            buildIconColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'action';
+        }
         const buildBadgeColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'primary';
 
         return (
