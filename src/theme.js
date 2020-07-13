@@ -20,6 +20,14 @@ const theme = createMuiTheme({
                 width: 25,
             }
         }
+    },
+    props: {
+        MuiLink: {
+            color: 'inherit',
+            underline: 'none',
+            target: '_blank',
+            rel: 'noopener'
+        }
     }
 });
 

@@ -38,21 +38,15 @@ class GitHubForks extends React.Component {
                         <Box width={400} m={0.5}>
                             <Card key={fork.owner.login} raised={true} square={true}>
                                 <Box m={0.5} display="flex" alignItems="center">
-                                    <Link href={fork.html_url}
-                                          color="inherit" underline="none"
-                                          target="_blank" rel="noopener">
+                                    <Link href={fork.html_url} >
                                         <GitHubUser url={fork.owner.url}/>
                                     </Link>
 
-                                    <Link href={GitHubApi.commitsUrlFrom(fork.html_url)}
-                                          color="inherit" underline="none"
-                                          target="_blank" rel="noopener">
+                                    <Link href={GitHubApi.commitsUrlFrom(fork.html_url)} >
                                         <GitHubCommitCount url={fork.commits_url}/>
                                     </Link>
 
-                                    <Link href={GitHubApi.actionsUrlFrom(fork.html_url)}
-                                          color="inherit" underline="none"
-                                          target="_blank" rel="noopener">
+                                    <Link href={GitHubApi.actionsUrlFrom(fork.html_url)} >
                                         <GitHubBuildSummary url={fork.url}/>
                                     </Link>
                                 </Box>
