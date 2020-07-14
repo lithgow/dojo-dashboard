@@ -35,7 +35,6 @@ class GitHubBuildSummary extends React.Component {
         clearInterval(this.timerID);
     }
 
-
     getBuilds() {
         GitHubApi.get(GitHubApi.workflowsUrlFrom(this.props.url))
             .then(response => {
@@ -77,11 +76,17 @@ class GitHubBuildSummary extends React.Component {
         }
         const buildBadgeColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'primary';
 
+        const unbadgedIcon = <BuildIcon color={buildIconColor}/>;
+        const badgedIcon = (
+            <StyledBadge badgeContent={buildNumber} color={buildBadgeColor}>
+                {unbadgedIcon}
+            </StyledBadge>
+        );
+        const buildIcon = this.state.lastBuildConclusion ? badgedIcon : unbadgedIcon;
+
         return (
             <Box display="flex" alignItems="center">
-                <StyledBadge badgeContent={buildNumber} color={buildBadgeColor}>
-                    <BuildIcon color={buildIconColor}/>
-                </StyledBadge>
+                {buildIcon}
                 <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
             </Box>
         );
