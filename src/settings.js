@@ -8,3 +8,5 @@ export const credentials = {
     username: "", // your github username
     password: ""  // your github password or token
 };
+
+export const appTitle = "";
