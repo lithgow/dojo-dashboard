@@ -8,7 +8,8 @@ class GitHubCoverage extends React.Component {
     render() {
         const instructionCoverage = this.parseCoverageCounters("INSTRUCTION");
         const lineCoverage = this.parseCoverageCounters("LINE");
-        const tooltip =
+        const highlightedCoverage = lineCoverage.coverage;
+        const tooltip = !highlightedCoverage && highlightedCoverage !== 0 ? "" :
             <div>
                 Line: {lineCoverage.coverageFraction} ({lineCoverage.coverage}%)
                 <br/>
@@ -21,7 +22,6 @@ class GitHubCoverage extends React.Component {
             </Tooltip>
         );
 
-        const highlightedCoverage = lineCoverage.coverage;
         const coverageBadgeColor = highlightedCoverage > 0 && highlightedCoverage < 90 ? 'error': 'primary';
         const badgedCoverageIcon = (
             <StyledBadge badgeContent={`${highlightedCoverage}%`} color={coverageBadgeColor}>
