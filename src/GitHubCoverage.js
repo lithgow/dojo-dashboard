@@ -8,20 +8,28 @@ class GitHubCoverage extends React.Component {
     render() {
         const coverageResults = this.parseCoverageCounters(this.props.xml);
         const coverage = coverageResults.coverage;
+        const coveragePercent = coverage ? `${coverage}%`: '';
         const coverageFraction = coverageResults.coverageFraction;
         const coverageIconColor = coverageResults.coverageIconColor;
         const coverageBadgeColor = coverage > 0 && coverage < 90 ? 'error': 'primary';
-        return (
+
+        const unbadgedCoverageIcon = (
+            <Tooltip title={coverageFraction}>
+                <AssessmentIcon color={coverageIconColor}/>
+            </Tooltip>
+        );
+        const badgedCoverageIcon = (
             <StyledBadge badgeContent={`${coverage}%`} color={coverageBadgeColor}>
-                <Tooltip title={coverageFraction}>
-                    <AssessmentIcon color={coverageIconColor}/>
-                </Tooltip>
+                {unbadgedCoverageIcon}
             </StyledBadge>
         );
+        const coverageIcon = coveragePercent ? badgedCoverageIcon : unbadgedCoverageIcon;
+
+        return (coverageIcon);
     }
 
     parseCoverageCounters() {
-        let coverage = "-";
+        let coverage;
         let coverageFraction = "";
         let coverageIconColor = "disabled";
         if (this.props.xml) {
