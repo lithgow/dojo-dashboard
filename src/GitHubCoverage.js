@@ -6,39 +6,43 @@ import StyledBadge from "./StyledBadge";
 class GitHubCoverage extends React.Component {
 
     render() {
-        const coverageResults = this.parseCoverageCounters(this.props.xml);
-        const coverage = coverageResults.coverage;
-        const coverageFraction = coverageResults.coverageFraction;
-        const coverageIconColor = coverageResults.coverageIconColor;
-        const coverageBadgeColor = coverage > 0 && coverage < 90 ? 'error': 'primary';
+        const instructionCoverage = this.parseCoverageCounters("INSTRUCTION");
+        const lineCoverage = this.parseCoverageCounters("LINE");
+        const tooltip =
+            <div>
+                Line: {lineCoverage.coverageFraction} ({lineCoverage.coverage}%)
+                <br/>
+                Instruction: {instructionCoverage.coverageFraction} ({instructionCoverage.coverage}%)
+            </div>;
 
         const unbadgedCoverageIcon = (
-            <Tooltip title={coverageFraction}>
-                <AssessmentIcon color={coverageIconColor}/>
+            <Tooltip title={tooltip}>
+                <AssessmentIcon color={instructionCoverage.coverageIconColor}/>
             </Tooltip>
         );
+
+        const highlightedCoverage = lineCoverage.coverage;
+        const coverageBadgeColor = highlightedCoverage > 0 && highlightedCoverage < 90 ? 'error': 'primary';
         const badgedCoverageIcon = (
-            <StyledBadge badgeContent={`${coverage}%`} color={coverageBadgeColor}>
+            <StyledBadge badgeContent={`${highlightedCoverage}%`} color={coverageBadgeColor}>
                 {unbadgedCoverageIcon}
             </StyledBadge>
         );
-        const coverageIcon = typeof coverage !== 'undefined' ? badgedCoverageIcon : unbadgedCoverageIcon;
-
-        return (coverageIcon);
+        return typeof highlightedCoverage !== 'undefined' ? badgedCoverageIcon : unbadgedCoverageIcon;
     }
 
-    parseCoverageCounters() {
+    parseCoverageCounters(counterName) {
         let coverage;
         let coverageFraction = "";
         let coverageIconColor = "disabled";
         if (this.props.xml) {
             const xml = new DOMParser().parseFromString(this.props.xml, "text/xml");
-            const counters = xml.evaluate(`/report/counter[@type='INSTRUCTION']`, xml, null, XPathResult.ANY_TYPE, null);
+            const counters = xml.evaluate(`/report/counter[@type='${counterName}']`, xml, null, XPathResult.ANY_TYPE, null);
 
-            let instructionCoverage = counters.iterateNext();
-            if (instructionCoverage) {
-                const covered = parseInt(instructionCoverage.getAttribute("covered"));
-                const missed = parseInt(instructionCoverage.getAttribute("missed"));
+            let coverageCounter = counters.iterateNext();
+            if (coverageCounter) {
+                const covered = parseInt(coverageCounter.getAttribute("covered"));
+                const missed = parseInt(coverageCounter.getAttribute("missed"));
                 const total = covered + missed;
                 coverage = Math.floor(covered / total * 100);
                 coverageFraction = `${covered} / ${total}`;
