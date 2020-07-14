@@ -74,7 +74,6 @@ class GitHubTestResults extends React.Component {
                 {badgedSkipIcon}
             </Box>
         );
-
     }
 }
 
