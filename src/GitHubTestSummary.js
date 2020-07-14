@@ -20,13 +20,13 @@ class GitHubTestSummary extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.buildId !== this.props.buildId) {
+        if (prevProps.buildId !== this.props.buildId || prevProps.buildStatus !== this.props.buildStatus) {
             this.getArtifacts();
         }
     }
 
     getArtifacts() {
-        if (this.props.buildId) {
+        if (this.props.buildId && this.props.buildStatus === 'completed') {
             GitHubApi.get(GitHubApi.artifactsUrlFrom(this.props.url, this.props.buildId))
                 .then(response => {
                     const testResultsArtifact = response.json.artifacts.find(artifact => artifact.name === "test-results");

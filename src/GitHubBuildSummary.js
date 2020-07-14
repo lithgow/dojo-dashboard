@@ -12,6 +12,7 @@ class GitHubBuildSummary extends React.Component {
             numberOfBuilds: "?",
             lastBuildNumber: "?",
             lastBuildId: null,
+            lastBuildStatus: "",
             lastBuildConclusion: ""
         };
     }
@@ -55,11 +56,13 @@ class GitHubBuildSummary extends React.Component {
                         console.log(`Build ${buildNumber} wasn't the last of ${numberOfBuilds} builds for ${this.props.url}`);
                     }
                     const buildId = response.json.workflow_runs[0].id;
+                    const buildStatus = response.json.workflow_runs[0].status;
                     const buildConclusion = response.json.workflow_runs[0].conclusion;
                     this.setState({
                         numberOfBuilds: numberOfBuilds,
                         lastBuildNumber: buildNumber,
                         lastBuildId: buildId,
+                        lastBuildStatus: buildStatus,
                         lastBuildConclusion: buildConclusion
                     });
                 } else this.noResults();
@@ -87,7 +90,10 @@ class GitHubBuildSummary extends React.Component {
         return (
             <Box display="flex" alignItems="center">
                 {buildIcon}
-                <GitHubTestSummary url={this.props.url} buildId={this.state.lastBuildId}/>
+                <GitHubTestSummary
+                    url={this.props.url}
+                    buildId={this.state.lastBuildId}
+                    buildStatus={this.state.lastBuildStatus}/>
             </Box>
         );
     }
