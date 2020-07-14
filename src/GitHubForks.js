@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "@material-ui/lab/Alert";
 import Box from "@material-ui/core/Box";
 import Card from '@material-ui/core/Card';
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -39,7 +40,7 @@ class GitHubForks extends React.Component {
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
         if (error) {
-            return <Box>Error: {error.message}</Box>;
+            return <Alert variant="filled" severity="error">{error.message}</Alert>;
         } else if (!isLoaded) {
             return (
                 <Grid container alignItems="center" justify="center">
@@ -47,7 +48,7 @@ class GitHubForks extends React.Component {
                 </Grid>
             );
         } else if (!statusOk) {
-            return <Box>{json.message}</Box>;
+            return <Alert variant="filled" severity="error">{json.message}</Alert>;
         } else {
             return (
                 <Grid container direction="row" justify="center">
