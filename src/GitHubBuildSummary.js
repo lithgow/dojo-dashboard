@@ -65,9 +65,9 @@ class GitHubBuildSummary extends React.Component {
         }
         let buildIconColor = "disabled";
         if (this.state.lastBuildConclusion) {
-            buildIconColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'action';
+            buildIconColor = 'action';
         }
-        const buildBadgeColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'primary';
+        const buildBadgeColor = this.getBuildBadgeColor();
 
         return (
             <Box display="flex" alignItems="center">
@@ -80,6 +80,11 @@ class GitHubBuildSummary extends React.Component {
                     buildStatus={this.state.lastBuildStatus}/>
             </Box>
         );
+    }
+
+    getBuildBadgeColor() {
+        if (this.state.lastBuildConclusion === 'success') return 'secondary';
+        return this.state.lastBuildConclusion === "failure" ? 'error' : 'primary';
     }
 }
 

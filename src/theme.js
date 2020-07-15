@@ -7,6 +7,10 @@ const theme = createMuiTheme({
             default: '#364252',
             paper: '#364252'
         },
+        secondary: {
+            main: '#26be26',
+            contrastText: '#fff'
+        }
     },
     typography: {
         fontSize: 13,

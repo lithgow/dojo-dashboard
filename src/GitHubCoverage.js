@@ -22,13 +22,18 @@ class GitHubCoverage extends React.Component {
             </Tooltip>
         );
 
-        const coverageBadgeColor = highlightedCoverage > 0 && highlightedCoverage < 90 ? 'error': 'primary';
+        const coverageBadgeColor = this.getCoverageBadgeColor(highlightedCoverage);
         const badgedCoverageIcon = (
             <StyledBadge badgeContent={`${highlightedCoverage}%`} color={coverageBadgeColor}>
                 {unbadgedCoverageIcon}
             </StyledBadge>
         );
         return typeof highlightedCoverage !== 'undefined' ? badgedCoverageIcon : unbadgedCoverageIcon;
+    }
+
+    getCoverageBadgeColor(highlightedCoverage) {
+        if (highlightedCoverage === 100) return 'secondary';
+        return highlightedCoverage < 90 ? 'error' : 'primary';
     }
 
     parseCoverageCounters(counterName) {

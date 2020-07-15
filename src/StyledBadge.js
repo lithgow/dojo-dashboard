@@ -7,9 +7,6 @@ const SmallerBadge = withStyles((theme) => ({
     badge: {
         top: 6,
         padding: '0 2px',
-    },
-    colorSecondary: {
-        backgroundColor: '#00fc00'
     }
 }))(Badge);
 
