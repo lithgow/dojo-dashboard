@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "@material-ui/lab/Alert";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -24,7 +25,11 @@ class GitHubUser extends React.Component {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
         if (error) {
             console.log(`Error getting ${this.props.url} : ${error.message}`);
-            return <Box>!!!</Box>;
+            return (
+                <Box width={this.width}>
+                    <Alert severity="error">Error loading user details</Alert>
+                </Box>
+            );
         } else if (!isLoaded) {
             return (
                 <Box width={this.width}>
@@ -33,7 +38,11 @@ class GitHubUser extends React.Component {
             );
         } else if (!statusOk) {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
-            return <Box>!!!</Box>;
+            return (
+                <Box width={this.width}>
+                    <Alert severity="error">Error loading user details</Alert>
+                </Box>
+            );
         } else {
             const userName = json.name ? json.name : json.login;
             return (
