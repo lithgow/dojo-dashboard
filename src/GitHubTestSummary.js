@@ -62,8 +62,13 @@ class GitHubTestSummary extends React.Component {
 
     async unpackFile(directory, filename) {
         const file = directory.files.find(d => d.path === filename);
-        const content = await file.buffer();
-        return content.toString();
+        if (file) {
+            const content = await file.buffer();
+            return content.toString();
+        } else {
+            console.log(`Error extracting ${filename} from build ${this.props.buildId}`);
+            return "";
+        }
     }
 
     render() {
