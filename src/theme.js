@@ -8,6 +8,9 @@ const theme = createMuiTheme({
             paper: '#364252'
         },
     },
+    typography: {
+        fontSize: 13,
+    },
     overrides: {
         MuiAppBar: {
             colorPrimary: {

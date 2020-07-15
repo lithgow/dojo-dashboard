@@ -9,19 +9,7 @@ class GitHubBuildSummary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            numberOfBuilds: "?",
-            lastBuildNumber: "?",
-            lastBuildId: null,
-            lastBuildStatus: "",
-            lastBuildConclusion: ""
         };
-    }
-
-    noResults() {
-        this.setState({
-            numberOfBuilds: '-',
-            lastBuildNumber: '-'
-        });
     }
 
     componentDidMount() {
@@ -42,7 +30,7 @@ class GitHubBuildSummary extends React.Component {
                 const buildWorkflow = response.json.workflows.find(workflow => workflow.name === "build");
                 if (buildWorkflow) {
                     this.getLatestBuild(buildWorkflow.id);
-                } else this.noResults();
+                }
             })
     }
 
@@ -65,31 +53,27 @@ class GitHubBuildSummary extends React.Component {
                         lastBuildStatus: buildStatus,
                         lastBuildConclusion: buildConclusion
                     });
-                } else this.noResults();
+                }
             })
     }
 
     render() {
-        const buildNumber = this.state.lastBuildNumber +
-            (this.state.lastBuildNumber !== this.state.numberOfBuilds ? "!":"");
-
+        let buildNumber;
+        if (this.state.lastBuildNumber) {
+            buildNumber = this.state.lastBuildNumber +
+                (this.state.lastBuildNumber !== this.state.numberOfBuilds ? "!":"");
+        }
         let buildIconColor = "disabled";
         if (this.state.lastBuildConclusion) {
             buildIconColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'action';
         }
         const buildBadgeColor = this.state.lastBuildConclusion === "failure" ? 'error' : 'primary';
 
-        const unbadgedIcon = <BuildIcon color={buildIconColor}/>;
-        const badgedIcon = (
-            <StyledBadge badgeContent={buildNumber} color={buildBadgeColor}>
-                {unbadgedIcon}
-            </StyledBadge>
-        );
-        const buildIcon = this.state.lastBuildConclusion ? badgedIcon : unbadgedIcon;
-
         return (
             <Box display="flex" alignItems="center">
-                {buildIcon}
+                <StyledBadge badgeContent={buildNumber} color={buildBadgeColor}>
+                    <BuildIcon color={buildIconColor}/>
+                </StyledBadge>
                 <GitHubTestSummary
                     url={this.props.url}
                     buildId={this.state.lastBuildId}

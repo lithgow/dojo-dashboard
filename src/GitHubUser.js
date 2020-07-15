@@ -31,7 +31,7 @@ class GitHubUser extends React.Component {
             return <Box>!!!</Box>;
         } else {
             return (
-                <Box display="flex" alignItems="center">
+                <Box width={148} display="flex" alignItems="center">
                     <Avatar alt={userName} src={json.avatar_url} />&nbsp;{userName}
                 </Box>
             );
