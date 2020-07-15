@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import * as GitHubApi from './GitHubApi'
 
 class GitHubUser extends React.Component {
@@ -9,6 +10,7 @@ class GitHubUser extends React.Component {
         this.state = {
             apiResponse: new GitHubApi.GitHubApiResponse()
         };
+        this.width = 148;
     }
 
     componentDidMount() {
@@ -20,18 +22,22 @@ class GitHubUser extends React.Component {
 
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
-        const userName = json.name ? json.name : json.login;
         if (error) {
             console.log(`Error getting ${this.props.url} : ${error.message}`);
             return <Box>!!!</Box>;
         } else if (!isLoaded) {
-            return <Box>...</Box>;
+            return (
+                <Box width={this.width}>
+                    <LinearProgress />
+                </Box>
+            );
         } else if (!statusOk) {
             console.log(`Error getting ${this.props.url} : ${json.message}`);
             return <Box>!!!</Box>;
         } else {
+            const userName = json.name ? json.name : json.login;
             return (
-                <Box width={148} display="flex" alignItems="center">
+                <Box width={this.width} display="flex" alignItems="center">
                     <Avatar alt={userName} src={json.avatar_url} />&nbsp;{userName}
                 </Box>
             );
