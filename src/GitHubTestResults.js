@@ -4,6 +4,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import BlockIcon from '@material-ui/icons/Block';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import OnErrorTooltip from "./OnErrorTooltip";
 import StyledBadge from "./StyledBadge";
 
 class GitHubTestResults extends React.Component {
@@ -39,20 +40,22 @@ class GitHubTestResults extends React.Component {
         }
 
         return (
-            <Box display="flex" alignItems="center">
-                <StyledBadge badgeContent={testCount}>
-                    {<AssignmentIcon color={testIconColor}/>}
-                </StyledBadge>
-                <StyledBadge badgeContent={passCount} color={passBadgeColor}>
-                    {<CheckIcon color={passIconColor}/>}
-                </StyledBadge>
-                <StyledBadge badgeContent={failCount} color={failBadgeColor}>
-                    {<ClearIcon color={failIconColor}/>}
-                </StyledBadge>
-                <StyledBadge badgeContent={skipCount}>
-                    {<BlockIcon color={skipIconColor}/>}
-                </StyledBadge>
-            </Box>
+            <OnErrorTooltip title={this.props.onErrorTooltip} >
+                <Box display="flex" alignItems="center">
+                    <StyledBadge badgeContent={testCount}>
+                        {<AssignmentIcon color={testIconColor}/>}
+                    </StyledBadge>
+                    <StyledBadge badgeContent={passCount} color={passBadgeColor}>
+                        {<CheckIcon color={passIconColor}/>}
+                    </StyledBadge>
+                    <StyledBadge badgeContent={failCount} color={failBadgeColor}>
+                        {<ClearIcon color={failIconColor}/>}
+                    </StyledBadge>
+                    <StyledBadge badgeContent={skipCount}>
+                        {<BlockIcon color={skipIconColor}/>}
+                    </StyledBadge>
+                </Box>
+            </OnErrorTooltip>
         );
     }
 }

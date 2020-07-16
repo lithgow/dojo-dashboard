@@ -41,6 +41,7 @@ class GitHubTestSummary extends React.Component {
         getRaw(artifactUrl).then(response => {
             response.arrayBuffer().then(
                 (zip) => {
+                    this.setState({errorTooltip: ""});
                     this.unpackZip(zip);
                 }
             )
@@ -67,14 +68,23 @@ class GitHubTestSummary extends React.Component {
             return content.toString();
         } else {
             console.log(`Error extracting ${filename} from build ${this.props.buildId}`);
+            this.addErrorTooltip(filename);
             return "";
         }
+    }
+
+    addErrorTooltip(filename) {
+        let error = `${filename} not found`;
+        if (this.state.errorTooltip) {
+            error = <div>{this.state.errorTooltip}{error}</div>
+        }
+        this.setState({errorTooltip: error});
     }
 
     render() {
         return (
             <Box display="flex" alignItems="center">
-                <GitHubTestResults json={this.state.testResults}/>
+                <GitHubTestResults json={this.state.testResults} onErrorTooltip={this.state.errorTooltip}/>
                 <GitHubCoverage xml={this.state.coverageResults}/>
             </Box>
         );
