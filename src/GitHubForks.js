@@ -51,7 +51,7 @@ class GitHubForks extends React.Component {
             return <Alert variant="filled" severity="error">{json.message}</Alert>;
         } else {
             return (
-                <Grid container direction="row" justify="center">
+                <Grid container direction="row">
                     {json.map(fork => (
                         <Box key={fork.owner.login} width={400} m={0.5}>
                             <Card raised={true} square={true}>
