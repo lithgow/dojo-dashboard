@@ -13,7 +13,7 @@ class GitHubUser extends React.Component {
         this.state = {
             apiResponse: new GitHubApi.GitHubApiResponse()
         };
-        this.width = 148;
+        this.width = 145;
     }
 
     componentDidMount() {
