@@ -3,6 +3,8 @@ import Alert from "@material-ui/lab/Alert";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
 import * as GitHubApi from './GitHubApi'
 
 class GitHubUser extends React.Component {
@@ -47,7 +49,11 @@ class GitHubUser extends React.Component {
             const userName = json.name ? json.name : json.login;
             return (
                 <Box width={this.width} display="flex" alignItems="center">
-                    <Avatar alt={userName} src={json.avatar_url} />&nbsp;{userName}
+                    <Avatar alt={userName} src={json.avatar_url} />
+                    &nbsp;
+                    <Tooltip title={userName}>
+                        <Typography noWrap>{userName}</Typography>
+                    </Tooltip>
                 </Box>
             );
         }

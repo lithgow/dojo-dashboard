@@ -15,7 +15,9 @@ const theme = createMuiTheme({
         }
     },
     typography: {
-        fontSize: 13,
+        body1: {
+            fontSize: 13,
+        }
     },
     overrides: {
         MuiAppBar: {
