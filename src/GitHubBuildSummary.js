@@ -27,9 +27,17 @@ class GitHubBuildSummary extends React.Component {
     getBuilds() {
         GitHubApi.get(GitHubApi.workflowsUrlFrom(this.props.url))
             .then(response => {
-                const buildWorkflow = response.json.workflows.find(workflow => workflow.name === "build");
-                if (buildWorkflow) {
-                    this.getLatestBuild(buildWorkflow.id);
+                if (response.statusOk) {
+                    const buildWorkflow = response.json.workflows.find(workflow => workflow.name === "build");
+                    if (buildWorkflow) {
+                        this.getLatestBuild(buildWorkflow.id);
+                    }
+                } else {
+                    console.log(`Error loading workflows for ${GitHubApi.workflowsUrlFrom(this.props.url)}`);
+                    if (response) {
+                        console.log(`  ${response.response.status}: ${response.response.statusText}`);
+                        console.log(`  ${response.json}`);
+                    }
                 }
             })
     }

@@ -29,9 +29,17 @@ class GitHubTestSummary extends React.Component {
         if (this.props.buildId && this.props.buildStatus === 'completed') {
             GitHubApi.get(GitHubApi.artifactsUrlFrom(this.props.url, this.props.buildId))
                 .then(response => {
-                    const testResultsArtifact = response.json.artifacts.find(artifact => artifact.name === "test-results");
-                    if (testResultsArtifact) {
-                        this.getZipArtifact(testResultsArtifact.archive_download_url);
+                    if (response.statusOk) {
+                        const testResultsArtifact = response.json.artifacts.find(artifact => artifact.name === "test-results");
+                        if (testResultsArtifact) {
+                            this.getZipArtifact(testResultsArtifact.archive_download_url);
+                        }
+                    } else {
+                        console.log(`Error loading test results artifact for ${GitHubApi.artifactsUrlFrom(this.props.url, this.props.buildId)}`);
+                        if (response) {
+                            console.log(`  ${response.response.status}: ${response.response.statusText}`);
+                            console.log(`  ${response.json}`);
+                        }
                     }
                 })
         }

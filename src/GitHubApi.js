@@ -20,6 +20,7 @@ export class GitHubApiResponse {
     json = [];
     error = null;
     headers = null;
+    reponse = null;
 }
 
 export const getRaw = (url) => {
@@ -34,6 +35,7 @@ export const get = (url) => new Promise((resolve) => {
     getRaw(url).then(response => {
         apiResponse.statusOk = response.ok;
         apiResponse.headers = response.headers;
+        apiResponse.response = response;
         response.json().then(
             (result) => {
                 apiResponse.isLoaded = true;
