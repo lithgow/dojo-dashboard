@@ -39,6 +39,7 @@ class GitHubForks extends React.Component {
 
     render() {
         const { statusOk, isLoaded, json, error } = this.state.apiResponse;
+
         if (error) {
             return <Alert variant="filled" severity="error">{error.message}</Alert>;
         } else if (!isLoaded) {
@@ -52,19 +53,19 @@ class GitHubForks extends React.Component {
         } else {
             return (
                 <Grid container direction="row">
-                    {json.map(fork => (
+                    {json.filter(recent).map(fork => (
                         <Box key={fork.owner.login} width={400} m={0.5}>
                             <Card raised={true} square={true}>
                                 <Box m={0.5} display="flex" alignItems="center">
-                                    <Link href={fork.html_url} >
+                                    <Link href={fork.html_url}>
                                         <GitHubUser url={fork.owner.url}/>
                                     </Link>
 
-                                    <Link href={GitHubApi.commitsUrlFrom(fork.html_url)} >
+                                    <Link href={GitHubApi.commitsUrlFrom(fork.html_url)}>
                                         <GitHubCommitCount url={fork.commits_url}/>
                                     </Link>
 
-                                    <Link href={GitHubApi.actionsUrlFrom(fork.html_url)} >
+                                    <Link href={GitHubApi.actionsUrlFrom(fork.html_url)}>
                                         <GitHubBuildSummary url={fork.url}/>
                                     </Link>
                                 </Box>
@@ -75,6 +76,12 @@ class GitHubForks extends React.Component {
             );
         }
     }
+}
+
+function recent(fork) {
+    const ignoreForksBefore = new Date("2022-06-01T00:00:00Z");
+    let forkDate = new Date(fork.created_at);
+    return forkDate >= ignoreForksBefore;
 }
 
 export default GitHubForks;
