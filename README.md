@@ -1,72 +1,56 @@
 [![build](../../workflows/build/badge.svg)](../../actions?query=workflow%3Abuild)
 
-# GitHub Fork Watcher
+# Dojo Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The dashboard accompanies the XP Dojo TDD workshop. It provides an extra element to the workshops where attendees can push changes and see a small build chain kick in and some keys stats reported via the dashboard.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Starting
 
-### `npm start`
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The usual scripts are available, so to start the app, run the following.
 
-Runs the app in the development mode.<br />
+    npm start
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Github API Token
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To increase the rate limit, authenticate with Github.
 
-### `npm run build`
+Update the `settings.js` with your username and a freshly generated token. Create a token in [Github](https://github.com/settings/tokens).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Setting up for a Workshop
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We have an elaborate forking structure and a special 'delete fork dance' that we have to do to setup for every new workshop.
 
-### `npm run eject`
+ * The root Github project is https://github.com/xp-dojo/tdd-bank-account-java
+ * The branch `classes` differs in that it includes Github actions and Gradle
+ * the fork https://github.com/xp-dojo-classes is where we want workshop attendees to fork
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ ### The Delete Form Dance
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To setup for a new workshop with a clean fork history.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Delete the https://github.com/xp-dojo-classes fork (orphaning any forks)
+1. Create a new fork from https://github.com/xp-dojo/tdd-bank-account-java under the `xp-dojo` order and call it `xp-dojo-classes`
+1. On the new fork, merge the `classes` branch to `master`
+1. Share the instructions below (to have folks fork from the `xp-dojo-classes` fork)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### Instructions for Attendees
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+TBC
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Playing with Github's API
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+You can test with curl
 
-### Analyzing the Bundle Size
+    curl https://api.github.com/repos/xp-dojo-classes/tdd-bank-account-java/forks?per_page=1000
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+or authenticated:
 
-### Making a Progressive Web App
+    curl -u username:token https://api.github.com/repos/xp-dojo-classes/tdd-bank-account-java/forks?per_page=1000
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
